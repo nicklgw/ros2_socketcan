@@ -1,0 +1,15 @@
+[Unit]
+Description=Simple wrapper around SocketCAN
+After=network.target
+
+[Service]
+Type=simple
+User=bzlrobot
+ExecStart=/usr/bin/bash /opt/ros/humble/share/ros2_socketcan/launch/ros2_socketcan.sh
+ExecStop=/usr/bin/killall -INT socket_can_receiver_node_exe socket_can_sender_node_exe
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
